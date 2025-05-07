@@ -55,6 +55,12 @@ This will produce a file called base.html, that you may open in your browser:
 
 <img src="small_base.png" width="500" />
 
+## Escherichia Coli metabolism
+
+Running the full metabolome of Escherichia Coli (file Graphs/test_Ecoli.csv) will produce a much larger base:
+
+<img src="Ecoli_base.png" width="500" />
+
 ## Getting started
 Run test.py to get started, then run fiber.py
 
