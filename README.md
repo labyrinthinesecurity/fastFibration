@@ -1,6 +1,6 @@
 This is a python port of https://github.com/makselab/FastFibration fast fibration algorithm
 
-Run test.py to get started
+Run test.py to get started, then run fiber.py
 
 The Graphs subdirectory contains:
 - graphs with strongly connected components (SCC): 3 components (3SCC), 6 components (6SCC)
