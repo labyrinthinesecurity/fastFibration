@@ -8,13 +8,13 @@ Initally, the algorithm was presented in [Morone et. al.](https://www.pnas.org/c
 
 To find the fibration partitioning of a given directed network, only the information of the network structure (nodes and edges) 
 and the types of each edge (if edges are multidimensional) are necessary. 
-For this, the network must be parsed as an **CSV file** following the structure of an edgelist containing two essential informations (source and target) and one optional information (the type of the edge for multiplex scenarios). 
+For this, the network must be parsed as a **CSV file** located in the **Graphs/** directory, and follow the structure of an edgelist containing two essential informations (source and target) and one optional information (the type of the edge for multiplex scenarios). 
 
-For instance, let us consider the graph below where the edges can assume two possible values: 'positive' or 'negative'.
+For instance, let us consider the network below where the edges can assume two possible values: 'positive' or 'negative'.
 
 <img src="small_example.png" width="500" />
 
-The edgefile for this graph, called `net.csv` should follow the format below:
+The edgefile for this network, called `Graphs/net.csv` should follow the format below:
 
 ```
 SourceName,TargetName,Type,Source,Target
@@ -43,7 +43,9 @@ graph,df = graph_from_csv("Graphs/net.csv", is_directed=True)
 fiber_partition = fast_fibration(graph)
 ```
 
-To visualize the resulting base, run the following:
+This will generate the transformed graph, called the base, in **Bases/net.csv**
+
+To visualize this base, run the following:
 
 ```
 number_nontrivial_fibers, total_fibers, fiber_map = extract_fiber_groups(fiber_partition)
@@ -55,16 +57,20 @@ This will produce a file called base.html, that you may open in your browser:
 
 <img src="small_base.png" width="500" />
 
+Note that this visualization doesnt render colored edge types, but the actual base generated in *Bases/net.csv* does. 
+
 ## Escherichia Coli metabolism
 
-Running the full metabolome of Escherichia Coli (file Graphs/test_Ecoli.csv) will produce a much larger base:
+Running the full metabolome of Escherichia Coli (located in *Graphs/test_Ecoli.csv*) will produce a much larger base:
 
 <img src="Ecoli_base.png" width="500" />
 
 ## Getting started
+All your source graphs must be stored in CSV format in a subdirectory called *Graph/* and all bases produced by FFP will be stored in CSV format the *Bases/* subdirectory.
+
 Run test.py to get started, then run fiber.py
 
-The Graphs subdirectory contains:
+The default *Graphs/* subdirectory the comes with this repository contains:
 - graphs with strongly connected components (SCC): 3 components (3SCC), 6 components (6SCC)
 - graphs depicted in **Symmetries of Living Systems: Symmetry Fibrations and Synchronization in Biological Networks**: figure 1.3 page 10, figure 4.2 page 49, figure 17.5 page 358
 - graph of E.Coli metabolism (test_Ecoli.txt)
