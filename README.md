@@ -2,7 +2,11 @@
 
 This is a python implementation of https://github.com/makselab/FastFibration fast fibration partitioning (FFP) algorithm
 
-Initally, the algorithm was presented in [Morone et. al.](https://www.pnas.org/content/117/15/8306) in 2021. In 2025, FFP was used extensively in [Symmetries of Living Systems: Symmetry Fibrations and Synchronization in Biological Networks](https://arxiv.org/pdf/2502.18713)
+Initally, the algorithm was presented in [Morone et. al.](https://www.pnas.org/content/117/15/8306) in 2021 and was instrumental to identify key biological patterns in the genetics network of bacteria.
+
+In February 2025, the power of FFP in biology was further demonstrated in the book [Symmetries of Living Systems: Symmetry Fibrations and Synchronization in Biological Networks](https://arxiv.org/pdf/2502.18713)
+
+In March 2025, I used FFP to [identify fundamental fibrations in Azure and AWS](https://www.linkedin.com/pulse/taming-nhis-aws-azure-part-1-visual-tour-christophe-parisel-f9tpe/) IAM graphs.
 
 ## Usage 
 
@@ -71,8 +75,8 @@ All your source graphs must be stored in CSV format in a subdirectory called *Gr
 Run test.py to get started, then run fiber.py
 
 The default *Graphs/* subdirectory the comes with this repository contains:
-- graphs with strongly connected components (SCC): 3 components (3SCC), 6 components (6SCC)
-- graphs depicted in **Symmetries of Living Systems: Symmetry Fibrations and Synchronization in Biological Networks**: figure 1.3 page 10, figure 4.2 page 49, figure 17.5 page 358
+- graphs with 3 strongly connected components (test_3SCC.csv)
+- a graph depicted in **Symmetries of Living Systems: Symmetry Fibrations and Synchronization in Biological Networks**: figure 14.3 page 269 (14.3p269.csv)
 - graph of E.Coli metabolism (test_Ecoli.txt)
 
 ## License

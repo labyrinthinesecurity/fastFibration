@@ -63,19 +63,6 @@ def generate_graph_from_csv(what,filename):
         graph.add_edge(source, target, color=edge_color, physics=True, smooth={"type": smooth_type})
   graph.show(f"{what}.html")
 
-def dump_pseudofiber_base_to_csv(graph, node_ids, edges, filename):
-    with open(filename, mode="w", newline="") as file:
-      writer = csv.writer(file)
-      writer.writerow(["SourceName", "TargetName", "EdgeType", "Source", "Target"])
-      for edge in edges:
-        cacheline=str(edge[0])+"->"+str(edge[1])
-        if cacheline in cache:
-#              print("HIT")
-          pass
-        else:
-           cache[cacheline]=1
-           writer.writerow([edge[0],edge[1], node_ids[edge[0]], node_ids[edge[1]]])
-
 def dump_fibration_graph_to_csv(graph, filename):
     edgetype_prop = graph.string_eproperties["edgetype"]  # Edge types
 #    print("BASE",base)
@@ -105,6 +92,11 @@ def dump_fibration_base_to_csv(graph, base, fiber_map, filename):
     #for c in namec:
     #  print(c,namec[c])
 #    print("BASE",base)
+    if os.path.exists("Bases/"):
+      pass
+    else:
+      print("ERROR: the Bases/ subdirecroy doesnt exist")
+      sys.exit()
     with open("Bases/"+filename, mode="w", newline="") as file:
       writer = csv.writer(file)
       writer.writerow(["SourceName", "TargetName", "EdgeType", "Source", "Target"])
@@ -137,6 +129,7 @@ def dump_fibration_base_to_csv(graph, base, fiber_map, filename):
                cache[cacheline]=1
                writer.writerow([namec[str(rep_src)],namec[str(rep_tgt)], edgetype_prop[edge.index], rep_src+1, rep_tgt+1])
 # graph_def.jl
+    print("Base generated in Bases/"+filename)
 
 class Edge:
     """
@@ -420,10 +413,15 @@ def graph_from_csv(file_path, is_directed):
     Create graph from CSV file.
     The file must contain columns: 'Source', 'Target', and optionally 'Type'.
     """
-    df = pd.read_csv(file_path)
+    if os.path.exists(file_path):
+      print("Reading graph "+file_path)
+      df = pd.read_csv(file_path)
+    else:
+      print("ERROR: file "+file_path+"doesnt exist")
+      sys.exit()
     graph = Graph(is_directed)
     N = max(df['Source'].max(), df['Target'].max())
-    print("Max nodes N=",N)
+    #print("Max nodes N=",N)
     # Create the vertices
     for i in range(0, N):
         if VERBOSE:
@@ -619,14 +617,15 @@ def initialize(graph):
         if len(components[label])>1:
           scc_qty+=1
           #if VERBOSE:
-          print("  ",scc_qty,">SCC with more than 1 node, label:",label,"nodes:")
-          for c in components[label]:
-            print(c+1,end=' ')
-          print()
+          #print("  ",scc_qty,">SCC with more than 1 node, label:",label,"nodes:")
+          #for c in components[label]:
+          #  print(c+1,end=' ')
+          #print()
           nodes_in_sccs_qty +=len(components[label])
         new_scc = StrongComponent()
         new_scc.insert_nodes(components[label])
         sccs.append(new_scc)
+    print("  Number of nodes in SCCs:",nodes_in_sccs_qty)
 
     partition = [Fiber()]
     autopivot = []
@@ -658,7 +657,7 @@ def initialize(graph):
     
     set_vertices_properties("fiber_index", fiber_index, graph)
 
-    print("nodes in SCCs with more than 1 node:",nodes_in_sccs_qty)
+    #print("nodes in SCCs with more than 1 node:",nodes_in_sccs_qty)
     return partition, pivot_queue
 
 def enqueue_splitted(new_classes, pivot_queue):
