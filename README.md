@@ -10,6 +10,8 @@ In March 2025, I used FFP to [identify fundamental fibrations in Azure and AWS](
 
 ## Usage 
 
+### General graph
+
 To find the fibration partitioning of a given directed network, only the information of the network structure (nodes and edges) 
 and the types of each edge (if edges are multidimensional) are necessary. 
 For this, the network must be parsed as a **CSV file** located in the **Graphs/** directory, and follow the structure of an edgelist containing two essential informations (source and target) and one optional information (the type of the edge for multiplex scenarios). 
@@ -62,6 +64,13 @@ This will produce a file called base.html, that you may open in your browser:
 <img src="small_base.png" width="500" />
 
 Note that this visualization doesnt render colored edge types, but the actual base generated in *Bases/net.csv* does. 
+
+### Azure NHIs
+
+To create Azure NHI fibers, please ensure you have run [Azure Silhouette](https://github.com/labyrinthinesecurity/silhouette) with the --frs option in your environment first, then run:
+```
+fiber_azure.py
+```
 
 ## Escherichia Coli metabolism
 
