@@ -10,7 +10,11 @@ In March 2025, I used FFP to [identify fundamental fibrations in Azure and AWS](
 
 ## Usage 
 
-### General graph
+This python version of FFP comes in two flavors:
+- universal FFP: works the same graphs as the original FFP algorithm
+- Azure FFP: specifically designed to work with Azure IAM graphs
+
+### Universal FFP
 
 To find the fibration partitioning of a given directed network, only the information of the network structure (nodes and edges) 
 and the types of each edge (if edges are multidimensional) are necessary. 
@@ -65,12 +69,14 @@ This will produce a file called base.html, that you may open in your browser:
 
 Note that this visualization doesnt render colored edge types, but the actual base generated in *Bases/net.csv* does. 
 
-### Azure NHIs
+### Azure FFP
 
-To create Azure NHI fibers, please ensure you have run [Azure Silhouette](https://github.com/labyrinthinesecurity/silhouette) with the --frs option in your environment first, then run:
+To create fibers for Azure Non Human Identities (NHIs), please ensure you have run [Azure Silhouette](https://github.com/labyrinthinesecurity/silhouette) first, using the --frs option in your environment, then simply run:
 ```
 fiber_azure.py
 ```
+
+This will dump all NHI fibers, showing how many identities are in which each fiber, and what are their principal IDs.
 
 ## Escherichia Coli metabolism
 
